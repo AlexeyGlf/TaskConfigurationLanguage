@@ -15,7 +15,7 @@
       1. .NET 6.0 или выше
       2. Операционная система: Windows/Linux/macOS
     Использование
-      1. Запустите программу: dotnet run --project MyConfigConverter.csproj
+      1. Запустите программу: dotnet run --project ConfigurationLanguage.csproj
       2. Введите пути к файлам при запросе:
       Введите путь файла, который следует преобразовать
       C:\configs\input.conf
