@@ -15,7 +15,6 @@ namespace MyConfigConverter
             string? outputPath = Console.ReadLine();
 
             Validation(inputPath, outputPath);
-
             try
             {
                 var source = File.ReadAllText(inputPath);
@@ -58,7 +57,7 @@ namespace MyConfigConverter
                 Console.WriteLine($"Файл по пути \"{outputPath}\" отсутствует");
                 Console.ReadLine();
             }
-            else if (outputPath.EndsWith("toml"))
+            else if (!outputPath.EndsWith("toml"))
             {
                 Console.WriteLine($"Неверное расширение выходного файла {outputPath}. Отсутствует расширение формата \"toml\".");
                 Console.ReadLine();
