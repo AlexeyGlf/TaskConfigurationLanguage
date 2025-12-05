@@ -1,8 +1,7 @@
 {
   "profiles": {
     "ConfigurationLanguage": {
-      "commandName": "Project",
-      "commandLineArgs": "--input C:\\Program\\input.conf --output C:\\Program\\output.toml"
+      "commandName": "Project"
     }
   }
 }

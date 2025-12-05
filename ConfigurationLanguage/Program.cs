@@ -7,12 +7,30 @@ namespace MyConfigConverter
     {
         static void Main(string[] args)
         {
-            //string inputFile = "C:\Program\input.conf";
-            //string outputFile = "C:\Program\output.toml";
-            Console.WriteLine("Введите путь файла, который следует преобразовать");
-            string? inputPath = Console.ReadLine();
-            Console.WriteLine("Введите путь к файлу в который будет поступать выходная информация");
-            string? outputPath = Console.ReadLine();
+            string? inputPath = string.Empty;
+            string? outputPath = string.Empty;
+            if (args != null && args.Length > 0)
+            {
+                for (int i = 0; i < args.Length; i++)
+                {
+                    if (args[i] == "--input" && i + 1 < args.Length)
+                    {
+                        inputPath = args[++i];
+                    }
+                    else if (args[i] == "--output" && i + 1 < args.Length)
+                    {
+                        outputPath = args[++i];
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Введите путь файла, который следует преобразовать");
+                inputPath = Console.ReadLine();
+                Console.WriteLine("Введите путь к файлу в который будет поступать выходная информация");
+                outputPath = Console.ReadLine();
+            }
+                
 
             Validation(inputPath, outputPath);
             try
