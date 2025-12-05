@@ -53,7 +53,7 @@ namespace MyConfigConverter
             }
         }
         /// <summary>
-        /// Валидация вводимых данные
+        /// Валидация вводимых и выходных данных
         /// </summary>
         /// <param name="inputPath"></param>
         /// <param name="outputPath"></param>
@@ -121,10 +121,7 @@ namespace MyConfigConverter
             var remainingLines = new List<string>();
             foreach (var statement in statements)
             {
-                //Регулярное вырожение. Означение что здесь берутся строки где символы включиетльны от a до z ли с нижним подчёркиванием
-                //Знак ".+$" означает что символ заканчивается знаком доллора. 
-                //Знак точка означает любой символ
-                //"+" - продолжительность символов до знака "$"
+                //Регулярное вырожение. 
                 if (Regex.IsMatch(statement, @"^[_a-z]+ := .+$"))
                 {
                     //Разделяем строки на массив из двух элементов по условию " := "
@@ -163,8 +160,6 @@ namespace MyConfigConverter
             if (value.StartsWith("'") && value.EndsWith("'"))
             {
                 //Метод Substring обрезает строку, именно первый элемент "'" и последний
-                //Помним что послдений элемент в моссиве это Length - 1, а так как последний элемент это "'" то его мы должны удалить 
-                //Поэтому обрезаем на ещё 1 элемент
                 return value.Substring(1, value.Length - 2);
             }
             return value;
@@ -218,7 +213,7 @@ namespace MyConfigConverter
             }
         }
         /// <summary>
-        /// Данный чудесный метод преобразует строку в конечный результат, подставляя вместо имени переменной, его значение
+        /// Данный метод преобразует строку в конечный результат, подставляя вместо имени переменной, его значение
         /// </summary>
         /// <param name="line">Строка для преобразования</param>
         /// <returns></returns>
@@ -235,7 +230,7 @@ namespace MyConfigConverter
             if (result.StartsWith("'") && result.EndsWith(","))
                 return result[1..^2];
             if (result.EndsWith(","))
-                return result[..^1]; //Данная запись означает, что надо обрезать последний элемент в массиве char (напомню, строка состоит из массива char)
+                return result[..^1]; //Данная запись означает, что надо обрезать последний элемент в массиве char
             //Это эквиволентно записи Substring(1, value.Length - 2);
             return result;
         }
@@ -265,8 +260,7 @@ namespace MyConfigConverter
         /// <exception cref="NotSupportedException"></exception>
         private static void AppendToToml(string key, object value, string prefix = "")
         {
-            //Елси prefix пуст, то возвращает значение key иначе prefix.key (вместо prefix и key их значения). Это нужно для рекурсивного получения имени таблицы
-            //Но на данный момент она до конца не реализована
+            //Елси prefix пуст, то возвращает значение key иначе prefix.key (вместо prefix и key их значения).
             var fullKey = string.IsNullOrEmpty(prefix) ? key : $"{prefix}.{key}";
 
             switch (value)
